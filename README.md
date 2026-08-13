@@ -76,6 +76,45 @@ github.com/settings/tokens before relying on this tool for anything real.
    Writes `output/cv_recommendations.md` — ranked projects plus draft CV
    bullets, each traceable back to real evidence.
 
+## Example
+
+The job description is a plain **text or markdown file** — copy-paste the
+posting into it. PDF/DOCX aren't parsed directly; convert to text first.
+
+`jd.txt`:
+```
+Backend Developer
+
+Requirements:
+- Node.js / NestJS, TypeScript
+- PostgreSQL
+- Docker
+- REST API design
+- Comfortable working in a team, understands system architecture
+```
+
+Running `/match-job-description jd.txt` produces `output/cv_recommendations.md`,
+e.g.:
+
+```markdown
+## Ranked projects
+
+| Rank | Repo | Final score | Tech match | Resp. match | ... |
+|---|---|---|---|---|---|
+| 1 | you/my-ecommerce-api | 73 | 90 | 70 | ... |
+| 2 | you/internal-dashboard | 51 | 60 | 55 | ... |
+
+## Draft CV bullets
+
+**you/my-ecommerce-api** (core contributor)
+- Built backend REST API using NestJS, Prisma, and PostgreSQL
+- Contributed to the Next.js frontend with Supabase Auth integration
+```
+
+Every bullet traces back to a specific entry in `output/project_knowledge_base.json`
+— if a project has thin evidence for a JD requirement, the report says so
+instead of stretching the match.
+
 ## How scoring works
 
 **Contribution score** (per repo, 0-100): weighted combination of
