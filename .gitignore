@@ -5,4 +5,3 @@ __pycache__/
 *.pyc
 cv.tex
 .claude/scheduled_tasks.lock
-.claude
